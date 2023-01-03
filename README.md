@@ -1,4 +1,8 @@
 # Minecraft Damage Boost Plugin
+
+![alt text](https://media.discordapp.net/attachments/949379408324591676/1059795837183602718/danage_booster_plugin.png)
+
+
 This is my first plugin
 
 Basically you can now set specific items and how much damage they will do. 

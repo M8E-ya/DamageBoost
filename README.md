@@ -1,4 +1,10 @@
-# DamageBoostPlugin
-This is my first plugin, its pretty simple.
-Basically you can now set how much damage you want your specififc items to do in minecraf. 
-very usefull if you wanna make those loka practice servers and dont wanna bother setting up different quality armour to get that correct 33% damage
+# Minecraft Damage Boost Plugin
+This is my first plugin
+
+Basically you can now set specific items and how much damage they will do. 
+Very useful if you wanna make those loka practice servers and dont wanna bother setting up different protection armours to get that correct 33% damage boost
+
+
+
+This plugin is 100% made on java after learning it for a month, its my first plugin and I've not even touched kotlin yet so please dont hate me
+There is also a /toggleboost command that can be used by OPs to toggle the plugin on or off, there is also a config file as well :D

@@ -48,6 +48,5 @@ public final class DamageBoost extends JavaPlugin implements Listener {
         double damage = event.getDamage();
         damage *= damageMultiplier;
         event.setDamage(damage);
-        //trying to push this dont mind me
     }
 }

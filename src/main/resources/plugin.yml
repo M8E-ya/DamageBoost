@@ -2,9 +2,3 @@ name: DamageBoost
 version: '${project.version}'
 main: me.perpltxed.damageboost.DamageBoost
 api-version: 1.19
-
-commands:
-  toggleboost:
-    description: Enables or disables the damage boost plugin.
-    usage: /<command>
-    permission: damageboost.command

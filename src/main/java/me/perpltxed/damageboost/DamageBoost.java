@@ -1,13 +1,10 @@
 package me.perpltxed.damageboost;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+import java.util.stream.Collectors;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,65 +12,41 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class DamageBoost extends JavaPlugin implements Listener, CommandExecutor {
+public final class DamageBoost extends JavaPlugin implements Listener {
 
-    private boolean enabled;
-    private Map<Material, Double> boostFactors;
-    private double boostValue;
+    private double damageMultiplier;
+    private List<Material> eligibleMaterials;
 
     @Override
     public void onEnable() {
-        saveDefaultConfig();
-        reloadConfig();
+        getLogger().info("Starting up the damage boost plugin");
         getServer().getPluginManager().registerEvents(this, this);
-        getCommand("toggleboost").setExecutor(this);
 
-        enabled = true;
-        boostFactors = new HashMap<>();
-        boostValue = getConfig().getDouble("damageBoost.value");
+        // Load the configuration file
+        FileConfiguration config = getConfig();
+        config.options().copyDefaults(true);
+        saveConfig();
 
-        for (String material : getConfig().getConfigurationSection("damageBoost.materials").getKeys(false)) {
-            Material mat = Material.valueOf(material);
-            double boostFactor = getConfig().getDouble("damageBoost.materials." + material);
-            boostFactors.put(mat, boostFactor);
-        }
+        // Get the damage multiplier and eligible materials from the configuration file
+        damageMultiplier = config.getDouble("damage-multiplier", 1.33);
+        eligibleMaterials = config.getStringList("eligible-materials").stream()
+                .map(Material::valueOf)
+                .collect(Collectors.toList());
     }
 
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        if (!enabled || !(event.getDamager() instanceof Player) || !(event.getEntity() instanceof Player)) {
+        if (!(event.getDamager() instanceof Player)) {
             return;
         }
-
         Player player = (Player) event.getDamager();
         ItemStack item = player.getInventory().getItemInMainHand();
 
-        Double boostFactor = boostFactors.get(item.getType());
-        if (boostFactor == null) {
+        if (!eligibleMaterials.contains(item.getType())) {
             return;
         }
-
         double damage = event.getDamage();
-        damage *= boostFactor * boostValue;
+        damage *= damageMultiplier;
         event.setDamage(damage);
-
-        // player.sendMessage(ChatColor.GREEN + "Your " + item.getType().name().toLowerCase().replace("_", " ") + " dealt an extra " + (int)(boostFactor * boostValue * 100) + "% damage!");
-    }
-
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!sender.isOp()) {
-            sender.sendMessage(ChatColor.RED + "You do not have permission to use this command.");
-            return true;
-        }
-
-        if (label.equalsIgnoreCase("toggleboost")) {
-            enabled = !enabled;
-            sender.sendMessage(ChatColor.GREEN + "Damage boost " + (enabled ? "enabled" : "disabled") + ".");
-            return true;
-        }
-
-        return false;
     }
 }
-

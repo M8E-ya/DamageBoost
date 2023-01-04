@@ -10,3 +10,4 @@ damage-multiplier: 1.33
 eligible-materials:
   - DIAMOND_SWORD
   - DIAMOND_AXE
+  -

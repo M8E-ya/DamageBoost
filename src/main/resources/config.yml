@@ -3,10 +3,12 @@
 
 # The value of this setting determines how much extra damage players will deal
 # when using eligible weapons.
+#
 damage-multiplier: 1.33
 
 # The values in this list specify the types of weapons that are eligible for
 # the damage boost.
+#
 eligible-materials:
   - DIAMOND_SWORD
   - DIAMOND_AXE

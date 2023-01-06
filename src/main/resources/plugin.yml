@@ -1,4 +1,4 @@
 name: DamageBoost
-version: '${project.version}'
+version: '1.1.0'
 main: me.perpltxed.damageboost.DamageBoost
 api-version: 1.19

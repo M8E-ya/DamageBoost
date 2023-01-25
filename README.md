@@ -6,7 +6,7 @@
 This is my first plugin
 
 Basically you can now set specific items and how much damage they will do. 
-Very useful if you wanna make those loka practice servers and dont wanna bother setting up different protection armours to get that correct 33% damage boost.
+Very useful if you wanna make those practice servers and dont wanna bother setting up different protection armours to get that correct damage boost.
 
 
 

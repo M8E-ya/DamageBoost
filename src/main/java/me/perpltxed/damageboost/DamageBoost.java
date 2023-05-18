@@ -20,7 +20,7 @@ public final class DamageBoost extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         getLogger().info("Starting up the damage boost plugin");
-        getServer().getPluginManager().registerEvents(this, this);
+        getServer().getPluginManager().registerEvents(new EnderPearlCooldown(this), this);
 
         // Load the configuration file
         FileConfiguration config = getConfig();

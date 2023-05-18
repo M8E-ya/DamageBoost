@@ -1,5 +1,3 @@
-# The value of the damage-multiplier setting is multiplied by the base damage dealt by the player to calculate the final damage dealt.
-# For example, if the base damage dealt by a player is 10, and the damage-multiplier setting is 1.33, then the final damage dealt would be 10 * 1.33 = 13.3.
 
 # The value of this setting determines how much extra damage players will deal
 # when using eligible weapons.
@@ -10,3 +8,6 @@ damage-multiplier: 1.33
 eligible-materials:
   - DIAMOND_SWORD
   - DIAMOND_AXE
+
+# Cooldown duration for ender pearls in milliseconds
+ender-pearl-cooldown: 15000
